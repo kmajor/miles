@@ -1,0 +1,17 @@
+<%= form_for(@united) do |f| %>
+  <% if @united.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@united.errors.count, "error") %> prohibited this united from being saved:</h2>
+
+      <ul>
+      <% @united.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
