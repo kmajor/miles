@@ -1,0 +1,34 @@
+= form_for @airline do |f|
+  - if @airline.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@airline.errors.count, "error")} prohibited this airline from being saved:"
+      %ul
+        - @airline.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :openflight_id
+    = f.text_field :openflight_id
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :alias
+    = f.text_field :alias
+  .field
+    = f.label :iata
+    = f.text_field :iata
+  .field
+    = f.label :iaco
+    = f.text_field :iaco
+  .field
+    = f.label :callsign
+    = f.text_field :callsign
+  .field
+    = f.label :country
+    = f.text_field :country
+  .field
+    = f.label :active
+    = f.check_box :active
+  .actions
+    = f.submit 'Save'

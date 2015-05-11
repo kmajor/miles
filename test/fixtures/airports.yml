@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  openflight_id: MyString
+  name: MyString
+  city: MyString
+  country: MyString
+  iata: MyString
+  icao: MyString
+  latitude: MyString
+  longitude: MyString
+  altitude: MyString
+  timezone: 9.99
+  dst: MyString
+
+two:
+  openflight_id: MyString
+  name: MyString
+  city: MyString
+  country: MyString
+  iata: MyString
+  icao: MyString
+  latitude: MyString
+  longitude: MyString
+  altitude: MyString
+  timezone: 9.99
+  dst: MyString

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Origin:
+  = @search.origin
+%p
+  %b Destination:
+  = @search.destination
+%p
+  %b Departure date:
+  = @search.departure_date
+%p
+  %b Arrival date:
+  = @search.arrival_date
+%p
+  %b Ip address:
+  = @search.ip_address
+
+= link_to 'Edit', edit_search_path(@search)
+\|
+= link_to 'Back', searches_path

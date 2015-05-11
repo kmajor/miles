@@ -1,0 +1,29 @@
+%h1 Listing searches
+
+%table
+  %thead
+    %tr
+      %th Origin
+      %th Destination
+      %th Departure date
+      %th Arrival date
+      %th Ip address
+      %th
+      %th
+      %th
+
+  %tbody
+    - @searches.each do |search|
+      %tr
+        %td= search.origin
+        %td= search.destination
+        %td= search.departure_date
+        %td= search.arrival_date
+        %td= search.ip_address
+        %td= link_to 'Show', search
+        %td= link_to 'Edit', edit_search_path(search)
+        %td= link_to 'Destroy', search, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Search', new_search_path

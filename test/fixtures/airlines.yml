@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  openflight_id: MyString
+  name: MyString
+  alias: MyString
+  iata: MyString
+  iaco: MyString
+  callsign: MyString
+  country: MyString
+  active: false
+
+two:
+  openflight_id: MyString
+  name: MyString
+  alias: MyString
+  iata: MyString
+  iaco: MyString
+  callsign: MyString
+  country: MyString
+  active: false

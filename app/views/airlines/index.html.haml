@@ -1,0 +1,35 @@
+%h1 Listing airlines
+
+%table
+  %thead
+    %tr
+      %th Openflight
+      %th Name
+      %th Alias
+      %th Iata
+      %th Iaco
+      %th Callsign
+      %th Country
+      %th Active
+      %th
+      %th
+      %th
+
+  %tbody
+    - @airlines.each do |airline|
+      %tr
+        %td= airline.openflight_id
+        %td= airline.name
+        %td= airline.alias
+        %td= airline.iata
+        %td= airline.iaco
+        %td= airline.callsign
+        %td= airline.country
+        %td= airline.active
+        %td= link_to 'Show', airline
+        %td= link_to 'Edit', edit_airline_path(airline)
+        %td= link_to 'Destroy', airline, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Airline', new_airline_path

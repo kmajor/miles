@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Openflight:
+  = @airline.openflight_id
+%p
+  %b Name:
+  = @airline.name
+%p
+  %b Alias:
+  = @airline.alias
+%p
+  %b Iata:
+  = @airline.iata
+%p
+  %b Iaco:
+  = @airline.iaco
+%p
+  %b Callsign:
+  = @airline.callsign
+%p
+  %b Country:
+  = @airline.country
+%p
+  %b Active:
+  = @airline.active
+
+= link_to 'Edit', edit_airline_path(@airline)
+\|
+= link_to 'Back', airlines_path
