@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :airlines
+
+  resources :searches
+
+  resources :airports
+
   resources :uniteds
 
   # The priority is based upon order of creation: first created -> highest priority.

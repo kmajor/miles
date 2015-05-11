@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503175541) do
+ActiveRecord::Schema.define(version: 20150508183121) do
+
+  create_table "airports", force: true do |t|
+    t.string   "openflight_id"
+    t.string   "name"
+    t.string   "city"
+    t.string   "country"
+    t.string   "iata"
+    t.string   "icao"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.string   "altitude"
+    t.decimal  "timezone"
+    t.string   "dst"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "searches", force: true do |t|
+    t.integer  "origin_id"
+    t.integer  "destination_id"
+    t.date     "departure_date"
+    t.date     "arrival_date"
+    t.string   "ip_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "searches", ["destination_id"], name: "index_searches_on_destination_id"
+  add_index "searches", ["origin_id"], name: "index_searches_on_origin_id"
 
   create_table "uniteds", force: true do |t|
     t.datetime "created_at"
