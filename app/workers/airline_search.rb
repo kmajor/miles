@@ -1,64 +1,27 @@
 class AirlineSearch
   include Sidekiq::Worker
   def perform(search_id, airline_alias)
-    self.send airline_alias + "_search", search_id
+    self.send airline_alias + "_search", search_id, airline_alias
   end
 
-  def AA_single_search(class, search)
-    browser = Watir::Browser.new :phantomjs
-    search_url = "http://www.aa.com/reservation/awardFlightSearchAccess.do"
-    browser.goto search_url
 
-    origin_field = browser.text_field :name => "originAirport"
-    destination_field = browser.text_field :name => "destinationAirport"
-    departure_date_month_field = browser.select_list :name => "flightParams.flightDateParams.travelMonth"
-    departure_date_day_field = browser.select_list :name => "flightParams.flightDateParams.travelDay"
-    departure_date_time_field = browser.select_list :name => "flightParams.flightDateParams.searchTime"
-    search_type_field = browser.radio(:id => "awardFlightSearchForm.tripType.oneWay")
-    date_type_button = browser.radio(:id => "awardFlightSearchForm.datesFlexible.false")
+  def AA_search(search_id, airline_alias)
 
-    origin_field.value = search.origin.iata
-    destination_field.value = search.destination.iata
-    departure_date_month_field.options[search.departure_date.month].select
-    departure_date_day_field.options[search.departure_date.day].select
-    departure_date_time_field.options[0].select #First Element in list is 'All Day'
-    search_type_field.set
-    date_type_button.set
-    browser.button(:name=>'_button_success').click
+# binding.pry
 
-    File.write('/home/ubuntu/workspace/public/burrito.html', URI.unescape(browser.html).force_encoding('utf-8'))
+#     SearchResult.create({:airline => Airline.where(:alias => airline_alias), :search => search})
 
-      
-  end
+    AaSearch.new.perform(Search::AA_AWARD_CLASSES[:economy_saver], search_id)
 
-  def AA_search(search_id)
-
-    search = Search.find(search_id)
-
-
-    noko.css('#flightTabMiles_0').text
-    noko.css('.caEconomy-MileSAAver_selected')
-    noko.css('.caEconomy-AAnytime')
-    noko.css('.caBusiness-MileSAAver')
-    noko.css('.caBusiness-AAnytime')
-    noko.css('.caFirst-MileSAAver')
-    noko.css('.caFirst-AAnytime')
+    # award_classes.each_key do |award_class| 
     
-  award_classes = {
-    :economy_saver => "caEconomy-MileSAAver",
-    :economy_anytime => "caEconomy-AAnytime",
-    :business_saver => "caBusiness-MilesSAAver",
-    :business_anytime => "caBusiness-AAnytime",
-    :first_saver => "caFirst-MileSAAver",
-    :first_anytime => "caFirst-AAnytime"
-  }
+    # # AASearch.perform_async(self.id, airline_alias)
+    #   AASearch.new.perform(self.id, airline_alias)
+    # end
 
-  award_classes
+#    File.write('/home/ubuntu/workspace/public/burrito.html', URI.unescape(browser.html).force_encoding('utf-8'))
 
-
-    File.write('/home/ubuntu/workspace/public/burrito.html', URI.unescape(browser.html).force_encoding('utf-8'))
-
-    binding.pry
+#    binding.pry
 
     # agent = Mechanize.new
     # page = agent.get("http://www.aa.com/reservation/awardFlightSearchAccess.do")

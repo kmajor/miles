@@ -5,6 +5,23 @@ class Search < ActiveRecord::Base
   
   SEARCHABLE_AIRLINES=['AA']
   
+  AA_AWARD_CLASSES = {
+  :economy_saver => "caEconomy-MileSAAver",
+  :economy_anytime => "caEconomy-AAnytime",
+  :business_saver => "caBusiness-MilesSAAver",
+  :business_anytime => "caBusiness-AAnytime",
+  :first_saver => "caFirst-MileSAAver",
+  :first_anytime => "caFirst-AAnytime"}
+
+
+  def result_by_airline(airline)
+    # airline_id = airline.id if airline.class == ActiveRecord::AirlineSearch
+    # airline_id = airline if airline.class == String && airline.numeric?
+    # raise "airline is neither a valid ID or airline object" unless defined? airline_id != nil
+    return SearchResult.where :search => self, :airline => airline
+  end
+
+  
   def run_searches
     SEARCHABLE_AIRLINES.each do |airline_alias|
       # AirlineSearch.perform_async(self.id, airline_alias)
