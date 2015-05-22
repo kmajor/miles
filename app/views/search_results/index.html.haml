@@ -1,0 +1,25 @@
+%h1 Listing search_results
+
+%table
+  %thead
+    %tr
+      %th Search
+      %th Airline
+      %th Results
+      %th
+      %th
+      %th
+
+  %tbody
+    - @search_results.each do |search_result|
+      %tr
+        %td= search_result.search
+        %td= search_result.airline
+        %td= search_result.results
+        %td= link_to 'Show', search_result
+        %td= link_to 'Edit', edit_search_result_path(search_result)
+        %td= link_to 'Destroy', search_result, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Search result', new_search_result_path

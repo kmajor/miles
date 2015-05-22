@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Search:
+  = @search_result.search
+%p
+  %b Airline:
+  = @search_result.airline
+%p
+  %b Results:
+  = @search_result.results
+
+= link_to 'Edit', edit_search_result_path(@search_result)
+\|
+= link_to 'Back', search_results_path

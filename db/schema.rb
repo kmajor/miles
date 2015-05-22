@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508183121) do
+ActiveRecord::Schema.define(version: 20150511111410) do
+
+  create_table "airlines", force: true do |t|
+    t.string   "openflight_id"
+    t.string   "name"
+    t.string   "alias"
+    t.string   "iata"
+    t.string   "iaco"
+    t.string   "callsign"
+    t.string   "country"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "airports", force: true do |t|
     t.string   "openflight_id"
@@ -28,6 +41,17 @@ ActiveRecord::Schema.define(version: 20150508183121) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "search_results", force: true do |t|
+    t.integer  "search_id"
+    t.integer  "airline_id"
+    t.text     "results"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "search_results", ["airline_id"], name: "index_search_results_on_airline_id"
+  add_index "search_results", ["search_id"], name: "index_search_results_on_search_id"
 
   create_table "searches", force: true do |t|
     t.integer  "origin_id"

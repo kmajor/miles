@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  search_id: 
+  airline_id: 
+  results: MyText
+
+two:
+  search_id: 
+  airline_id: 
+  results: MyText

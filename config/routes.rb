@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :search_results
+
   resources :airlines
 
   resources :searches

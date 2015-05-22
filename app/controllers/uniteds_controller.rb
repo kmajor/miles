@@ -22,7 +22,6 @@ class UnitedsController < ApplicationController
 
     united_availability = {:economy_saver => [], :economy_standard => [], :business_saver => [], :business_standard => [], :first_class_saver => [], :first_class_standard => []}
     united_seat_classes = [:economy_saver, :economy_standard, :business_saver, :business_standard, :first_class_saver, :first_class_standard]
-#    miles_data = Hash[united_seat_classes
     miles_data = Hash[united_seat_classes.map { | x | [x, nil] }]
 
     award_fields = results.parser.css('div#rewardSegments').css('div.divMileage')
@@ -105,10 +104,3 @@ class UnitedsController < ApplicationController
       params[:united]
     end
 end
-
-class String
-  def numeric?
-    Float(self) != nil rescue false
-  end
-end
-

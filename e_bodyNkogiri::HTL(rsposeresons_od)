@@ -1,0 +1,24 @@
+
+[1mFrom:[0m /home/ubuntu/workspace/app/models/search.rb @ line 24 Search#AA_search:
+
+    [1;34m15[0m: [32mdef[0m [1;34mAA_search[0m
+    [1;34m16[0m:   availability = {[33m:economy_saver[0m => [], [33m:economy_standard[0m => [], [33m:business_saver[0m => [], [33m:business_standard[0m => [], [33m:first_class_saver[0m => [], [33m:first_class_standard[0m => []}
+    [1;34m17[0m:   seat_classes = [[33m:economy_saver[0m, [33m:economy_standard[0m, [33m:business_saver[0m, [33m:business_standard[0m, [33m:first_class_saver[0m, [33m:first_class_standard[0m]
+    [1;34m18[0m: 
+    [1;34m19[0m:   hydra = [1;34;4mTyphoeus[0m::[1;34;4mHydra[0m.hydra
+    [1;34m20[0m: 
+    [1;34m21[0m:   first_request = [1;34;4mTyphoeus[0m::[1;34;4mRequest[0m.new([31m[1;31m"[0m[31mhttp://aa.com[1;31m"[0m[31m[0m)
+    [1;34m22[0m:   first_request.on_complete [32mdo[0m |response|
+    [1;34m23[0m:     [1;34;4mNokogiri[0m::HTML(response.response_body)
+ => [1;34m24[0m:     binding.pry
+    [1;34m25[0m:                 
+    [1;34m26[0m:     [1;34m# third_url = response.body[0m
+    [1;34m27[0m:     [1;34m# third_request = Typhoeus::Request.new(third_url)[0m
+    [1;34m28[0m:     [1;34m# hydra.queue third_request[0m
+    [1;34m29[0m:   [32mend[0m
+    [1;34m30[0m: 
+    [1;34m31[0m:   hydra.queue first_request
+    [1;34m32[0m:   hydra.run [1;34m# this is a blocking call that returns once all requests are complete[0m
+    [1;34m33[0m:   
+    [1;34m34[0m: [32mend[0m    
+

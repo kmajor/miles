@@ -31,7 +31,11 @@ gem 'pry'
 gem 'mechanize'
 gem 'awesome_print'
 gem 'haml-rails'
-
+gem 'tor-privoxy'
+gem 'thin'
+gem 'typhoeus'
+gem 'sidekiq'
+gem 'watir'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
