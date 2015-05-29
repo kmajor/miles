@@ -1,23 +1,33 @@
 class AirlineSearch
   include Sidekiq::Worker
   def perform(search_id, airline_alias)
-    self.send airline_alias + "_search", search_id, airline_alias
+    self.send airline_alias + "_Search", search_id, airline_alias
+  end
+
+  def UA_Search(search_id, airline_alias)
+    search = Search.find(search_id)
+    SearchResult.create({:airline => Airline.where(:alias => airline_alias).first, :search => search})
+    #UASearch.new.perform(search_id)
+    UASearch.perform_async(search_id)
   end
 
 
-  def AA_search(search_id, airline_alias)
-
-# binding.pry
-
-#     SearchResult.create({:airline => Airline.where(:alias => airline_alias), :search => search})
-
-    AaSearch.new.perform(Search::AA_AWARD_CLASSES[:economy_saver], search_id)
-
-    # award_classes.each_key do |award_class| 
-    
-    # # AASearch.perform_async(self.id, airline_alias)
-    #   AASearch.new.perform(self.id, airline_alias)
-    # end
+  def AA_Search(search_id, airline_alias)
+puts "Yah motherfuckers"
+    search = Search.find(search_id)
+    SearchResult.create({:airline => Airline.where(:alias => airline_alias).first, :search => search})
+#    AaSearch.new.perform(:economy_saver, search_id)
+    AASearch::AA_AWARD_CLASSES.each_key do |award_class|
+      sleep(1)
+      attempt = 1
+      begin
+        attempt += 1
+        AASearch.perform_async(award_class, search_id)
+      rescue
+        retry if attempt < 5
+      end
+#      AaSearch.new.perform(award_class, search_id)
+    end
 
 #    File.write('/home/ubuntu/workspace/public/burrito.html', URI.unescape(browser.html).force_encoding('utf-8'))
 
