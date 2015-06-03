@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+
   before_action :set_search, only: [:show, :edit, :update, :destroy]
   before_filter :assign_airports, :only => [:create, :update]
 
@@ -12,6 +13,7 @@ class SearchesController < ApplicationController
   # GET /searches/1
   # GET /searches/1.json
   def show
+    #@search_results = Search.results
   end
 
   # GET /searches/new
@@ -27,12 +29,11 @@ class SearchesController < ApplicationController
   # POST /searches.json
   def create
     @search = Search.new(search_params)
-    @search.save!
-    @search.run_searches
-    @search_results = @search.results
+#    @search_results = @search.results
     
     respond_to do |format|
       if @search.save
+        @search.run_searches
         format.html { redirect_to @search, notice: 'Search was successfully created.' }
         format.json { render :show, status: :created, location: @search }
       else

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150511111410) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "airlines", force: true do |t|
     t.string   "openflight_id"
     t.string   "name"
@@ -50,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150511111410) do
     t.datetime "updated_at"
   end
 
-  add_index "search_results", ["airline_id"], name: "index_search_results_on_airline_id"
-  add_index "search_results", ["search_id"], name: "index_search_results_on_search_id"
+  add_index "search_results", ["airline_id"], name: "index_search_results_on_airline_id", using: :btree
+  add_index "search_results", ["search_id"], name: "index_search_results_on_search_id", using: :btree
 
   create_table "searches", force: true do |t|
     t.integer  "origin_id"
@@ -63,8 +66,8 @@ ActiveRecord::Schema.define(version: 20150511111410) do
     t.datetime "updated_at"
   end
 
-  add_index "searches", ["destination_id"], name: "index_searches_on_destination_id"
-  add_index "searches", ["origin_id"], name: "index_searches_on_origin_id"
+  add_index "searches", ["destination_id"], name: "index_searches_on_destination_id", using: :btree
+  add_index "searches", ["origin_id"], name: "index_searches_on_origin_id", using: :btree
 
   create_table "uniteds", force: true do |t|
     t.datetime "created_at"

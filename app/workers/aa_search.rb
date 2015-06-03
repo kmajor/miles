@@ -24,10 +24,10 @@ class AASearch
       award_class = award_class.to_sym #Sidekiq can't pass in symbols (due to JSON encoding), so we need to resymbolize the award_class symbol
       search = Search.find(search_id)
       browser = send_request("http://www.aa.com/reservation/awardFlightSearchAccess.do")
-      if browser.title !~ /Award Reservations Flight Search/
-        browser.close
-        raise "tacos 4 pacos" 
-      end
+      # if browser.title !~ /Award Reservations Flight Search/
+      #   browser.close
+      #   raise "tacos 4 pacos" 
+      # end
       
       award_class_data = AA_AWARD_CLASSES[award_class]
       

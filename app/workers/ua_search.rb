@@ -23,7 +23,6 @@ class UASearch
     #   browser.close
     #   raise "tacos 4 pacos" 
     # end
-    
     agent = Mechanize.new
 
     page = agent.get("http://www.united.com/web/en-US/apps/booking/flight/searchOW.aspx?CS=N")
@@ -31,7 +30,7 @@ class UASearch
     origin_field = search_form.field_with(:name => "ctl00$ContentInfo$SearchForm$Airports1$Origin$txtOrigin")
     destination_field = search_form.field_with(:name => "ctl00$ContentInfo$SearchForm$Airports1$Destination$txtDestination")
     departure_date_field = search_form.field_with(:name => "ctl00$ContentInfo$SearchForm$DateTimeCabin1$Depdate$txtDptDate")
-    search_type_button = search_form.radiobutton_with(:value => "rdosearchby3") 
+    search_type_button = search_form.radiobutton_with(:value => "rdosearchby3")
 
     origin_field.value = search.origin.iata
     destination_field.value = search.destination.iata

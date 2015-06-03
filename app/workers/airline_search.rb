@@ -5,28 +5,29 @@ class AirlineSearch
   end
 
   def UA_Search(search_id, airline_alias)
-    search = Search.find(search_id)
-    SearchResult.create({:airline => Airline.where(:alias => airline_alias).first, :search => search})
-    #UASearch.new.perform(search_id)
-    UASearch.perform_async(search_id)
+    if Rails.configuration.use_concurrent_search
+      UASearch.perform_async(search_id)
+    else
+      UASearch.new.perform(search_id)
+    end
   end
 
 
   def AA_Search(search_id, airline_alias)
-puts "Yah motherfuckers"
     search = Search.find(search_id)
     SearchResult.create({:airline => Airline.where(:alias => airline_alias).first, :search => search})
-#    AaSearch.new.perform(:economy_saver, search_id)
     AASearch::AA_AWARD_CLASSES.each_key do |award_class|
-      sleep(1)
       attempt = 1
       begin
         attempt += 1
-        AASearch.perform_async(award_class, search_id)
+        if Rails.configuration.use_concurrent_search
+          AASearch.perform_async(award_class, search_id)
+        else 
+          AaSearch.new.perform(award_class, search_id)
+        end
       rescue
         retry if attempt < 5
       end
-#      AaSearch.new.perform(award_class, search_id)
     end
 
 #    File.write('/home/ubuntu/workspace/public/burrito.html', URI.unescape(browser.html).force_encoding('utf-8'))
