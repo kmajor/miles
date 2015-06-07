@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 20150511111410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
-  create_table "airlines", force: true do |t|
+  create_table "airlines", force: :cascade do |t|
     t.string   "openflight_id"
     t.string   "name"
     t.string   "alias"
@@ -29,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150511111410) do
     t.datetime "updated_at"
   end
 
-  create_table "airports", force: true do |t|
+  create_table "airports", force: :cascade do |t|
     t.string   "openflight_id"
     t.string   "name"
     t.string   "city"
@@ -45,10 +46,10 @@ ActiveRecord::Schema.define(version: 20150511111410) do
     t.datetime "updated_at"
   end
 
-  create_table "search_results", force: true do |t|
+  create_table "search_results", force: :cascade do |t|
     t.integer  "search_id"
     t.integer  "airline_id"
-    t.text     "results"
+    t.hstore   "results"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150511111410) do
   add_index "search_results", ["airline_id"], name: "index_search_results_on_airline_id", using: :btree
   add_index "search_results", ["search_id"], name: "index_search_results_on_search_id", using: :btree
 
-  create_table "searches", force: true do |t|
+  create_table "searches", force: :cascade do |t|
     t.integer  "origin_id"
     t.integer  "destination_id"
     t.date     "departure_date"
@@ -69,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150511111410) do
   add_index "searches", ["destination_id"], name: "index_searches_on_destination_id", using: :btree
   add_index "searches", ["origin_id"], name: "index_searches_on_origin_id", using: :btree
 
-  create_table "uniteds", force: true do |t|
+  create_table "uniteds", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

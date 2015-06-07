@@ -9,7 +9,7 @@ airport_codes.each do |airport|
 end
 
 #rails g scaffold airlines openflight_id:string name:string alias:string iata:string iaco:string callsign:string country:string active:boolean      
-airlines=[{name: 'United', alias: "UA"}, {name:'American', alias:"AA"}]
+airlines=[{name: 'United', alias: "UA"}, {name:'American', alias:"AA"}, {name: 'Delta', alias:"DELTA"}]
 airlines.each do |airline|
  Airline.create(airline).save
 end

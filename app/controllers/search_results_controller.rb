@@ -5,18 +5,20 @@ class SearchResultsController < ApplicationController
   # GET /search_results
   # GET /search_results.json
   def index
-        response.headers['Content-Type'] = 'text/event-stream'
+    response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE.new(response.stream)
-    begin
-      SearchResult.on_change do |result|
-          # t = render_to_string(partial: 'search_result', formats: [:html], locals: {result: result})
-          # sse.write(t)
-        sse.write(result, :event => 'refresh')
+    if Rails.configuration.search_results_listener
+      begin
+        SearchResult.on_change do |result|
+            # t = render_to_string(partial: 'search_result', formats: [:html], locals: {result: result})
+            # sse.write(t)
+          sse.write(result, :event => 'refresh')
+        end
+      rescue IOError
+        # Client Disconnected
+      ensure
+        sse.close
       end
-    rescue IOError
-      # Client Disconnected
-    ensure
-      sse.close
     end
     render nothing: true
   end

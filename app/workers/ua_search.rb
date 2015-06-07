@@ -7,8 +7,6 @@ class UASearch
   
   UA_AWARD_CLASSES = [:economy_saver, :economy_standard, :business_saver, :business_standard, :first_class_saver, :first_class_standard]
   
-
-
   def send_request(url)
     browser = Watir::Browser.new :phantomjs
 #    browser.driver.manage.timeouts.implicit_wait = 60 #3 seconds
@@ -55,8 +53,7 @@ class UASearch
     united_availability.each do |category, miles| 
       miles_data[category] = miles.min
     end
-
-    miles_data = Marshal.dump(miles_data)
+    
     SearchResult.create({:airline =>Airline.where(:alias => "UA").first, :search => search, :results => miles_data})
 
 

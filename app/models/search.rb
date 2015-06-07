@@ -3,7 +3,7 @@ class Search < ActiveRecord::Base
   belongs_to :origin, class_name: "Airport"
   belongs_to :destination, class_name: "Airport"
   
-  SEARCHABLE_AIRLINES=['UA']
+  SEARCHABLE_AIRLINES=['UA','AA','DELTA']
   
   def result_by_airline(airline)
     # airline_id = airline.id if airline.class == ActiveRecord::AirlineSearch

@@ -1,10 +1,10 @@
 class AirlineSearch
   include Sidekiq::Worker
   def perform(search_id, airline_alias)
-    self.send airline_alias + "_Search", search_id, airline_alias
+    self.send airline_alias + "_Search", search_id
   end
 
-  def UA_Search(search_id, airline_alias)
+  def UA_Search(search_id)
     if Rails.configuration.use_concurrent_search
       UASearch.perform_async(search_id)
     else
@@ -13,22 +13,24 @@ class AirlineSearch
   end
 
 
-  def AA_Search(search_id, airline_alias)
-    search = Search.find(search_id)
-    SearchResult.create({:airline => Airline.where(:alias => airline_alias).first, :search => search})
-    AASearch::AA_AWARD_CLASSES.each_key do |award_class|
-      attempt = 1
-      begin
-        attempt += 1
-        if Rails.configuration.use_concurrent_search
-          AASearch.perform_async(award_class, search_id)
-        else 
-          AaSearch.new.perform(award_class, search_id)
-        end
-      rescue
-        retry if attempt < 5
-      end
+  def AA_Search(search_id)
+    # AASearch.new.perform(:economy_saver, search_id)
+    if Rails.configuration.use_concurrent_search
+      AASearch.perform_async(:economy_saver, search_id)
+    else 
+      AASearch.new.perform(:economy_saver, search_id)
     end
+  end
+
+  def DELTA_Search(search_id)
+    # DELTA_Search.new.perform(search_id)
+    if Rails.configuration.use_concurrent_search
+      DELTA_Search.perform_async(search_id)
+    else 
+      DELTA_Search.new.perform(search_id)
+    end
+  end
+
 
 #    File.write('/home/ubuntu/workspace/public/burrito.html', URI.unescape(browser.html).force_encoding('utf-8'))
 
@@ -81,7 +83,5 @@ class AirlineSearch
 
     # miles_data = Marshal.dump(miles_data)
     # SearchResult.create({:airline =>airline, :search => search, :results => miles_data})
-
-  end
 
 end

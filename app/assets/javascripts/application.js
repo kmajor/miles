@@ -15,11 +15,3 @@
 //= require turbolinks
 //= require_tree .
 
-jQuery(document).ready(function() {
-  setTimeout(function() {
-    var source = new EventSource('/search_results');
-    source.addEventListener('refresh', function(e) {
-      window.location.reload();
-    });
-  }, 1);
-})

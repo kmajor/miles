@@ -1,7 +1,7 @@
-class AASearch
+class DELTASearch
   include Sidekiq::Worker
   
-  AIRLINE_ALIAS = "AA"
+  AIRLINE_ALIAS = "DELTA"
 
   AA_CABIN_TYPE = {:economy => "E", :business => "B", :first => "P"}
   AA_AWARD_TYPE = {:saver => "M", :anytime => "A"}

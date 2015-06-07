@@ -19,6 +19,8 @@ module Workspace
   config.allow_concurrency = true
   
   config.use_concurrent_search = true
+  config.search_results_listener = true
+  
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
