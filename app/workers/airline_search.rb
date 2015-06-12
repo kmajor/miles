@@ -1,6 +1,7 @@
 class AirlineSearch
   include Sidekiq::Worker
   def perform(search_id, airline_alias)
+    sleep(1) #Eliminates race condition due to Phantom seeing open ports that then get taken by the previous call.  It's a hack, there needs to be a better solution but as of now there doesn't seem to be to much in the phantom documentation about port specification.
     self.send airline_alias + "_Search", search_id
   end
 

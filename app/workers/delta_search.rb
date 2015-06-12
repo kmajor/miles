@@ -79,6 +79,13 @@ class DELTASearch
 
       SearchResult.create({:airline => Airline.where(:alias => AIRLINE_ALIAS).first, :search => search, :results => award_results})
 
+    rescue Timeout::Error, Errno::ECONNREFUSED => e 
+      if attempts < UA_MAX_ATTEMPTS
+        browser.close if browser.respond_to?(:close)
+        retry
+      else
+        SearchResult.create({:airline =>Airline.where(:alias => AIRLINE_ALIAS).first, :search => search, :results => {error: e.message}})
+      end
     ensure
       browser.close if browser.respond_to?(:close)
     end
