@@ -16,12 +16,8 @@ module Workspace
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
-  config.allow_concurrency = true
+#config.allow_concurrency = false #disabling for now, the previous circular dependency issue should be fixed in Rails 4.2
   
-  config.use_concurrent_search = true
-  config.search_results_listener = true
-  
-
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de

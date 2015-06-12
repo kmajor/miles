@@ -25,9 +25,9 @@ class AirlineSearch
   def DELTA_Search(search_id)
     # DELTA_Search.new.perform(search_id)
     if Rails.configuration.use_concurrent_search
-      DELTA_Search.perform_async(search_id)
+      DELTASearch.perform_async(search_id)
     else 
-      DELTA_Search.new.perform(search_id)
+      DELTASearch.new.perform(search_id)
     end
   end
 

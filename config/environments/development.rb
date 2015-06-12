@@ -1,13 +1,18 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  
+  config.full_asynchronous_mode = false #enables all concurrency including webserver caching and sse functionality
+  config.use_concurrent_search = config.full_asynchronous_mode
+  config.search_results_listener = config.full_asynchronous_mode
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = true
+  config.cache_classes = config.full_asynchronous_mode
 
   # Do not eager load code on boot.
-  config.eager_load = true
+  config.eager_load = config.full_asynchronous_mode
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true

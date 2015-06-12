@@ -28,8 +28,9 @@ JS
 
 
   def send_request(url)
-    browser = Watir::Browser.new :phantomjs
-#    browser.driver.manage.timeouts.implicit_wait = 60 #3 seconds
+    args = %w{--load-images=false}
+    browser = Watir::Browser.new(:phantomjs, :args => args)
+    # browser.driver.manage.timeouts.implicit_wait = 60 #3 seconds
     browser.goto url
     browser
   end
