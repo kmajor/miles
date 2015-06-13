@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   
-  config.full_asynchronous_mode = true #enables all concurrency including webserver caching and sse functionality
+  config.full_asynchronous_mode = false #disables all concurrency including webserver caching and sse functionality
   config.use_concurrent_search = config.full_asynchronous_mode
   config.search_results_listener = config.full_asynchronous_mode
 
