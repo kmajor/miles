@@ -3,7 +3,6 @@ class Search < ActiveRecord::Base
   belongs_to :origin, class_name: "Airport"
   belongs_to :destination, class_name: "Airport"
   
-  SEARCHABLE_AIRLINES=['DELTA','UA','AA']
 #  SEARCHABLE_AIRLINES=['UA']
   
   def result_by_airline(airline)
@@ -15,7 +14,7 @@ class Search < ActiveRecord::Base
 
   def run_searches
   # AirlineSearch.new.perform(self.id, "UA")
-    SEARCHABLE_AIRLINES.each do |airline_alias|
+    Rails.configuration.searchable_airlines.each do |airline_alias|
       if Rails.configuration.use_concurrent_search
         AirlineSearch.perform_async(self.id, airline_alias)
       else

@@ -7,9 +7,9 @@ class AirlineSearch
 
   def UA_Search(search_id)
     if Rails.configuration.use_concurrent_search
-      UASearch.perform_async(search_id)
+      UASearch.perform_async({search_id: search_id})
     else
-      UASearch.new.perform(search_id)
+      UASearch.new.perform({search_id: search_id})
     end
   end
 

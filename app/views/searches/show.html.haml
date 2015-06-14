@@ -1,4 +1,6 @@
 -if Rails.configuration.search_results_listener
+  #obviously this is a terrible place to add this code, normally it should go in the assets for search, but I can't find a way to conditionally include it based on configuration vars
+  #this bit hits the search_results index looking for updates and the refreshes the current page when an update is found
   :javascript
     jQuery(document).ready(function() {
       setTimeout((function() {
