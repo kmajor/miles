@@ -1,8 +1,7 @@
-class UASearch
+class UASearch < AirlineSearch
 #removed all iterpolated strings
 #moved hard coded values out of code into config/class constants
 #perform is a terribly named method for containing all the functional code for search, break all the code out and sequence it
-#
 
 
   include Sidekiq::Worker
@@ -23,7 +22,7 @@ class UASearch
   reward_segments: 'div#rewardSegments',
   mileage: 'div.divMileage'
   }
-  UA_RESULTS_TEMP_FILE = '/home/ubuntu/workspace/public/ua.html'
+  UA_PAGE_VIEW_TEMP_FILE = '/home/ubuntu/workspace/public/ua.html'
   
   def close_connection
     @agent.shutdown if @agent.respond_to?(:shutdown)
@@ -37,6 +36,7 @@ class UASearch
       retrieve_page(UA_SEARCH_URL)
       set_fields
       submit_form
+#      write_page_to_file(UA_RESULTS_TEMP_FILE, @agent.page.content)
       parse_award_data
       process_results
       write_results
@@ -84,10 +84,6 @@ class UASearch
     search_form.submit(search_form.button_with(:name => UA_CSS_SEARCH_FIELDS[:submit_button]))
   end
 
-  def write_page_to_file
-    File.write(US_TEMP_RESULTS_FILE, URI.unescape(@agent.page.content).force_encoding('utf-8'))
-  end
-  
   def parse_award_data
     @award_fields = @agent.page.parser.css(UA_CSS_RESULTS_FIELDS[:reward_segments]).css(UA_CSS_RESULTS_FIELDS[:mileage])
   end  

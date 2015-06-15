@@ -87,4 +87,5 @@ class SearchResultsController < ApplicationController
     def search_result_params
       params.require(:search_result).permit(:search_id, :airline_id, :results)
     end
+    
 end
