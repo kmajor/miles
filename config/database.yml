@@ -32,7 +32,7 @@ development:
   encoding: SQL_ASCII
   pool: 20
   database: miles_dev
-  username: postgres
-  password: tacoshop
+  username: miles_dev
+  password: taco
   host: localhost
-
+  template: template0
