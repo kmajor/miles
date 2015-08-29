@@ -1,0 +1,23 @@
+%h1 Listing analysts
+
+%table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th
+      %th
+      %th
+
+  %tbody
+    - @analysts.each do |analyst|
+      %tr
+        %td= analyst.first_name
+        %td= analyst.last_name
+        %td= link_to 'Show', analyst
+        %td= link_to 'Edit', edit_analyst_path(analyst)
+        %td= link_to 'Destroy', analyst, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Analyst', new_analyst_path

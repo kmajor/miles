@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :analyst_records
+  resources :analysts
+  resources :analyst_records
   resources :search_results
 
   resources :airlines
@@ -10,6 +13,8 @@ Rails.application.routes.draw do
   resources :uniteds
   
   Rails.application.routes.draw do
+  resources :analyst_records
+  resources :analysts
     get 'browser' => 'browser#index'
   end
 

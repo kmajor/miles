@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Analyst:
+  = @analyst_record.analyst
+%p
+  %b Game date:
+  = @analyst_record.game_date
+%p
+  %b Matchup:
+  = @analyst_record.matchup
+%p
+  %b Selection:
+  = @analyst_record.selection
+%p
+  %b Line source:
+  = @analyst_record.line_source
+%p
+  %b Posted time:
+  = @analyst_record.posted_time
+%p
+  %b Result:
+  = @analyst_record.result
+%p
+  %b Sport type:
+  = @analyst_record.sport_type
+
+= link_to 'Edit', edit_analyst_record_path(@analyst_record)
+\|
+= link_to 'Back', analyst_records_path

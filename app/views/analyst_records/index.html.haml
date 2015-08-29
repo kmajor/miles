@@ -1,0 +1,35 @@
+%h1 Listing analyst_records
+
+%table
+  %thead
+    %tr
+      %th Analyst
+      %th Game date
+      %th Matchup
+      %th Selection
+      %th Line source
+      %th Posted time
+      %th Result
+      %th Sport type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @analyst_records.each do |analyst_record|
+      %tr
+        %td= analyst_record.analyst
+        %td= analyst_record.game_date
+        %td= analyst_record.matchup
+        %td= analyst_record.selection
+        %td= analyst_record.line_source
+        %td= analyst_record.posted_time
+        %td= analyst_record.result
+        %td= analyst_record.sport_type
+        %td= link_to 'Show', analyst_record
+        %td= link_to 'Edit', edit_analyst_record_path(analyst_record)
+        %td= link_to 'Destroy', analyst_record, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Analyst record', new_analyst_record_path

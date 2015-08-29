@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  analyst_id: 
+  game_date: 2015-08-29
+  matchup: MyString
+  selection: MyString
+  line_source: MyString
+  posted_time: 2015-08-29 15:33:02
+  result: 1
+  sport_type: 1
+
+two:
+  analyst_id: 
+  game_date: 2015-08-29
+  matchup: MyString
+  selection: MyString
+  line_source: MyString
+  posted_time: 2015-08-29 15:33:02
+  result: 1
+  sport_type: 1
